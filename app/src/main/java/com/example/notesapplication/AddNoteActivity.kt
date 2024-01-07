@@ -2,6 +2,7 @@ package com.example.notesapplication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -21,8 +22,8 @@ class AddNoteActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             val data = Intent()
-            data.putExtra("title", title.text)
-            data.putExtra("description", description.text)
+            data.putExtra("title", title.text.toString())
+            data.putExtra("description", description.text.toString())
             setResult(RESULT_OK, data)
             finish()
         }
