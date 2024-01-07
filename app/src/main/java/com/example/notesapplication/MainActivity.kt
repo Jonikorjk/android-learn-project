@@ -1,7 +1,8 @@
 package com.example.notesapplication
 
 import android.content.Intent
-import android.media.Image
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -24,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         tx.commit()
     }
 
-    private fun setupButton() {
-        var button = findViewById<Button>(R.id.add_note_button)
+    private fun setupUI() {
+        val button = findViewById<Button>(R.id.add_note_button)
         button.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
             startActivityForResult(intent, 1)
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupInitialFragment()
-        setupButton()
+        setupUI()
     }
 
 
@@ -44,10 +45,15 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (resultCode == RESULT_OK) {
+
+//            val imageBytes = intent.getByteArrayExtra("bitmap")
+//            val bitmap: Bitmap? = data?.getParcelableExtra("bitmap")
+
             notes.add(
                 Notes(
                     title = data?.getStringExtra("title") ?: "empty data",
-                    description = data?.getStringExtra("description") ?: "empty data"
+                    description = data?.getStringExtra("description") ?: "empty data",
+                    null
                 )
             )
             Log.d("my tag", notes.toString())

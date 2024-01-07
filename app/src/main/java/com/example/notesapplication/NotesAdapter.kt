@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
 
 class NotesAdapter(context: Context, items: List<Notes>) :
@@ -19,8 +20,15 @@ class NotesAdapter(context: Context, items: List<Notes>) :
                 .inflate(R.layout.custom_cell_layout, parent, false)
         }
 
+        val item = getItem(position)
         val itemNameTextView: TextView = itemView!!.findViewById(R.id.cell_note_title)
-        itemNameTextView.text = getItem(position)?.title ?: "Note is empty"
+        itemNameTextView.text = item?.title ?: "Note is empty"
+
+
+        val imageView: ImageView = itemView!!.findViewById(R.id.cell_imageview)
+        if (item?.bitmap != null) {
+            imageView.setImageBitmap(item?.bitmap)
+        }
 
         return itemView
     }
